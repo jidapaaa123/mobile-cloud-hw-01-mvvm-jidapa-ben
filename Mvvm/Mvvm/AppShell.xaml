@@ -25,6 +25,11 @@
         Icon="{StaticResource IconMeta}"
         ContentTemplate="{DataTemplate pages:ManageMetaPage}"
         Route="manage" />
+    <ShellContent
+        Title="Hello World"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:HelloWorld}"
+        Route="helloWorld" />
 
     <Shell.FlyoutFooter>
         <Grid Padding="15">
