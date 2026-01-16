@@ -12,4 +12,9 @@ public partial class GameSetupPage : ContentPage
         // Navigate to the GameSetupPage route declared in AppShell
         await Shell.Current.GoToAsync("///scoreTracker");
     }
+
+    private async void AddPlayer_Clicked(object? sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
 }
