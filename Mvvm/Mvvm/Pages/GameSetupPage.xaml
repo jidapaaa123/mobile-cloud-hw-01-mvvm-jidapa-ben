@@ -22,7 +22,8 @@
                 <Button Text="Add" Command="{Binding AddPlayerCommand}" />
             </HorizontalStackLayout>
 
-            <Button Text="Start" Command="{Binding StartGameCommand}" />
+            <!-- Make Start button compact instead of stretching across the column -->
+            <Button Text="Start" Command="{Binding StartGameCommand}" HorizontalOptions="Start" WidthRequest="120" />
         </VerticalStackLayout>
 
         <!-- Right column: vertical list of players -->

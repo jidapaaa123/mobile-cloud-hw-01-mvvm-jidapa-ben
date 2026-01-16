@@ -19,13 +19,6 @@ namespace Mvvm.PageModels
         [ObservableProperty]
         private ObservableCollection<Player> players = new();
 
-        //private RelayCommand addPlayerCommand;
-        //public RelayCommand AddPlayerCommand => addPlayerCommand ??= new RelayCommand(() =>
-        //{
-
-
-        //});
-
         [RelayCommand]
         private async Task AddPlayer()
         {
@@ -40,6 +33,7 @@ namespace Mvvm.PageModels
         [RelayCommand]
         private async Task StartGame()
         {
+            HasGameStarted = true;
             await Shell.Current.GoToAsync("///scoreTracker");
         }
     }
