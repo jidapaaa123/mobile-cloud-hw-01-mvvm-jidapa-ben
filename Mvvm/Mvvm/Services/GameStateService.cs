@@ -37,8 +37,8 @@ namespace Mvvm.Services
             if (CurrentPlayerIndex >= Players.Count)
             {
                 CurrentPlayerIndex = 0;
-                CurrentRound++;
             }
+            CurrentRound++;
         }
     }
 }
