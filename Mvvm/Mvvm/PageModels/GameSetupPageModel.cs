@@ -32,6 +32,12 @@ namespace Mvvm.PageModels
 
 
         //});
+
+        [RelayCommand]
+        private async Task StartGame()
+        {
+            await Shell.Current.GoToAsync("///scoreTracker");
+        }
     }
 
 
