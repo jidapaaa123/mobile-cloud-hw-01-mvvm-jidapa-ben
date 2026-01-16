@@ -25,11 +25,37 @@
         Icon="{StaticResource IconMeta}"
         ContentTemplate="{DataTemplate pages:ManageMetaPage}"
         Route="manage" />
+
     <ShellContent
         Title="Hello World"
         Icon="{StaticResource IconMeta}"
         ContentTemplate="{DataTemplate pages:HelloWorld}"
         Route="helloWorld" />
+
+    <!-- Added app pages -->
+    <ShellContent
+        Title="Home"
+        Icon="{StaticResource IconDashboard}"
+        ContentTemplate="{DataTemplate pages:HomePage}"
+        Route="home" />
+
+    <ShellContent
+        Title="Game Setup"
+        Icon="{StaticResource IconProjects}"
+        ContentTemplate="{DataTemplate pages:GameSetupPage}"
+        Route="gameSetup" />
+
+    <ShellContent
+        Title="Score Tracker"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:ScoreTrackerPage}"
+        Route="scoreTracker" />
+
+    <ShellContent
+        Title="Results"
+        Icon="{StaticResource IconMeta}"
+        ContentTemplate="{DataTemplate pages:ResultsPage}"
+        Route="results" />
 
     <Shell.FlyoutFooter>
         <Grid Padding="15">

@@ -8,10 +8,4 @@ public partial class HelloWorld : ContentPage
         InitializeComponent();
         BindingContext = model;
     }
-
-    //// Optional constructor for DI or when a view model is provided
-    //public HelloWorld(MainPageModel model) : this()
-    //{
-    //    BindingContext = model;
-    //}
 }
