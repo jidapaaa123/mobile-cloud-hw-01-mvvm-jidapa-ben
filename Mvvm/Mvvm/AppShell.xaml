@@ -9,6 +9,12 @@
     Title="Mvvm">
 
     <ShellContent
+        Title="Home"
+        Icon="{StaticResource IconDashboard}"
+        ContentTemplate="{DataTemplate pages:HomePage}"
+        Route="home" />
+
+    <ShellContent
         Title="Dashboard"
         Icon="{StaticResource IconDashboard}"
         ContentTemplate="{DataTemplate pages:MainPage}"
@@ -31,13 +37,6 @@
         Icon="{StaticResource IconMeta}"
         ContentTemplate="{DataTemplate pages:HelloWorld}"
         Route="helloWorld" />
-
-    <!-- Added app pages -->
-    <ShellContent
-        Title="Home"
-        Icon="{StaticResource IconDashboard}"
-        ContentTemplate="{DataTemplate pages:HomePage}"
-        Route="home" />
 
     <ShellContent
         Title="Game Setup"
