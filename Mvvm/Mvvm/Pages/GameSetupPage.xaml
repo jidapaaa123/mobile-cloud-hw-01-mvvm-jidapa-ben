@@ -3,11 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mvvm.Pages.GameSetupPage"
              Title="GameSetup">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Start" Command="{Binding StartGameCommand}" />
-    </VerticalStackLayout>
+    <!-- Use a Grid so columns size reliably across devices -->
+    <Grid Padding="20" ColumnSpacing="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left column: controls -->
+        <VerticalStackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="12">
+            <Label 
+                Text="Welcome to .NET MAUI!"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
+
+            <HorizontalStackLayout Spacing="8">
+                <Entry Placeholder="Enter player name" Text="{Binding NewPlayerName}" HorizontalOptions="FillAndExpand" />
+                <Button Text="Add" Command="{Binding AddPlayerCommand}" />
+            </HorizontalStackLayout>
+
+            <Button Text="Start" Command="{Binding StartGameCommand}" />
+        </VerticalStackLayout>
+
+        <!-- Right column: vertical list of players -->
+        <CollectionView Grid.Column="1" ItemsSource="{Binding Players}"
+                        HorizontalOptions="Fill"
+                        SelectionMode="None">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="8" HasShadow="False" BorderColor="#DDD" CornerRadius="6">
+                        <Label Text="{Binding Name}" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

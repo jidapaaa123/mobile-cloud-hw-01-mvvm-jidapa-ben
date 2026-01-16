@@ -10,14 +10,14 @@ namespace Mvvm.PageModels
     {
         //public event PropertyChangedEventHandler? PropertyChanged;
 
-        //[ObservableProperty]
-        //private string? newPlayerName;
+        [ObservableProperty]
+        private string? newPlayerName;
 
-        //[ObservableProperty]
-        //private bool hasGameStarted;
+        [ObservableProperty]
+        private bool hasGameStarted;
 
-        //[ObservableProperty]
-        //private ObservableCollection<Player> Players;
+        [ObservableProperty]
+        private ObservableCollection<Player> players = new();
 
         //private RelayCommand addPlayerCommand;
         //public RelayCommand AddPlayerCommand => addPlayerCommand ??= new RelayCommand(() =>
@@ -26,12 +26,16 @@ namespace Mvvm.PageModels
 
         //});
 
-        //private RelayCommand startGameCommand;
-        //public RelayCommand StartGameCommand => startGameCommand ??= new RelayCommand(() =>
-        //{
+        [RelayCommand]
+        private async Task AddPlayer()
+        {
+            if (!string.IsNullOrWhiteSpace(NewPlayerName))
+            {
+                Players.Add(new Player { Name = NewPlayerName, Score = 0 });
+                NewPlayerName = string.Empty;
+            }
+        }
 
-
-        //});
 
         [RelayCommand]
         private async Task StartGame()
@@ -45,13 +49,13 @@ namespace Mvvm.PageModels
     public partial class Player : ObservableObject
     {
         [ObservableProperty]
-        public string name;
+        private string name;
 
         [ObservableProperty]
-        public int score;
+        private int score;
 
         [ObservableProperty]
-        public bool isCorrectGuess = false;
+        private bool isCorrectGuess = false;
 
     }
 
