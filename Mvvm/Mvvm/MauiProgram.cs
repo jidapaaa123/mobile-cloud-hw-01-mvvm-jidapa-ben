@@ -53,6 +53,8 @@ namespace Mvvm
             builder.Services.AddSingleton<ProjectListPageModel>();
             builder.Services.AddSingleton<ManageMetaPageModel>();
             builder.Services.AddSingleton<GameSetupPageModel>();
+            builder.Services.AddSingleton<ScoreTrackerPageModel>();
+
 
 
             builder.Services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
