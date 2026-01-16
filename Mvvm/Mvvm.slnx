@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Mvvm.Tests/Mvvm.Tests.csproj" />
+  <Project Path="Mvvm/Mvvm.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
