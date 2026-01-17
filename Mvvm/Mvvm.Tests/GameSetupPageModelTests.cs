@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Mvvm.Tests
 {
-    public class Class1
+    public class GameSetupPageModelTests
     {
         [Fact]
         public void TestPass()
