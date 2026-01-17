@@ -56,8 +56,7 @@ namespace Mvvm
             builder.Services.AddSingleton<HomePageModel>();
             builder.Services.AddSingleton<GameSetupPageModel>();
             builder.Services.AddSingleton<ScoreTrackerPageModel>();
-
-
+            builder.Services.AddSingleton<ResultsPageModel>();
 
             builder.Services.AddTransientWithShellRoute<ProjectDetailPage, ProjectDetailPageModel>("project");
             builder.Services.AddTransientWithShellRoute<TaskDetailPage, TaskDetailPageModel>("task");
