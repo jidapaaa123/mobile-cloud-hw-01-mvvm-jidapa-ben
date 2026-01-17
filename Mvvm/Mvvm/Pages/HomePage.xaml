@@ -8,6 +8,6 @@
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Button Text="New Game" Clicked="NewGame_Clicked"></Button>
+        <Button Text="New Game" Command="{Binding NewGameCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>
