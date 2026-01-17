@@ -2,44 +2,89 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mvvm.Pages.GameSetupPage"
-             Title="GameSetup">
-    <!-- Use a Grid so columns size reliably across devices -->
-    <Grid Padding="20" ColumnSpacing="16">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="200" />
-        </Grid.ColumnDefinitions>
+             Title="GameSetup"
+             BackgroundColor="Black">
+    <Grid Padding="20" RowSpacing="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <!-- Left column: controls -->
-        <VerticalStackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="12">
-            <Label 
-                Text="Welcome to .NET MAUI!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+        <!-- Title -->
+        <Label Grid.Row="0"
+               Text="Game Setup"
+               FontSize="28"
+               FontAttributes="Bold"
+               TextColor="#00FF00"
+               HorizontalOptions="Center"
+               Margin="0,0,0,20" />
 
-            <HorizontalStackLayout Spacing="8">
-                <Entry Placeholder="Enter player name" Text="{Binding NewPlayerName}" HorizontalOptions="FillAndExpand" />
-                <Button Text="Add" Command="{Binding AddPlayerCommand}" />
-            </HorizontalStackLayout>
+        <!-- Player Name Entry -->
+        <Entry Grid.Row="1"
+               Placeholder="Enter player name" 
+               PlaceholderColor="#666666"
+               Text="{Binding NewPlayerName}" 
+               ReturnCommand="{Binding AddPlayerCommand}"
+               BackgroundColor="#1a1a1a"
+               TextColor="White"
+               FontSize="18"
+               HeightRequest="50" />
 
-            <!-- Make Start button compact instead of stretching across the column -->
-            <Button Text="Start" Command="{Binding StartGameCommand}" HorizontalOptions="Start" WidthRequest="120" />
-        </VerticalStackLayout>
+        <!-- Buttons -->
+        <Grid Grid.Row="2" ColumnSpacing="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0"
+                    Text="Add Player" 
+                    Command="{Binding AddPlayerCommand}"
+                    BackgroundColor="#00FF00"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    HeightRequest="50" />
+            
+            <Button Grid.Column="1"
+                    Text="Start Game" 
+                    Command="{Binding StartGameCommand}"
+                    BackgroundColor="#00FF00"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    HeightRequest="50" />
+        </Grid>
 
-        <!-- Right column: vertical list of players -->
-        <CollectionView Grid.Column="1" ItemsSource="{Binding Players}"
-                        HorizontalOptions="Fill"
-                        SelectionMode="None">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="8" HasShadow="False" BorderColor="#DDD" CornerRadius="6">
-                        <Label Text="{Binding Name}" />
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <!-- Players List -->
+        <ScrollView Grid.Row="3" Margin="0,20,0,0">
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Players:"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="#00FF00"
+                       Margin="0,0,0,10" />
+                <CollectionView ItemsSource="{Binding Players}" SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="15" 
+                                   HasShadow="False" 
+                                   BorderColor="#00FF00" 
+                                   CornerRadius="6"
+                                   BackgroundColor="#1a1a1a">
+                                <Label Text="{Binding Name}" 
+                                       TextColor="White" 
+                                       FontSize="18" />
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
     </Grid>
 </ContentPage>

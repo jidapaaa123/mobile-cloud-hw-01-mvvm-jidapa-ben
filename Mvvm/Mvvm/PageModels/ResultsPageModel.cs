@@ -26,8 +26,8 @@ namespace Mvvm.PageModels
                     .Where(p => p.Score == HighestScore)
                     .Select(p => p.Name)
                     .ToList();
-            ResultsString = $"{string.Join(", ", winners)} with " +
-                $"the score of {HighestScore}";
+            ResultsString = $"{string.Join(" and ", winners)} with" +
+                $" {HighestScore} points";
         }
 
     }
