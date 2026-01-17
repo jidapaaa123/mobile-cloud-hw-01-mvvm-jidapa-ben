@@ -19,7 +19,7 @@ namespace Mvvm.PageModels
         {
             this.gameStateService = gameStateService;
             HighestScore = gameStateService.Players
-                    .OrderBy(p => p.Score)
+                    .OrderByDescending(p => p.Score)
                     .FirstOrDefault()
                     ?.Score ?? 0;
             var winners = gameStateService.Players
