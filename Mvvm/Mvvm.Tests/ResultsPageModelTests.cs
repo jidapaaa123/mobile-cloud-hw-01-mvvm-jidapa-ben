@@ -1,9 +1,10 @@
-﻿using Mvvm.Services;
+using Mvvm.PageModels;
+using Mvvm.Services;
 using Xunit;
 
 namespace Mvvm.Tests
 {
-    public class Class1
+    public class ResultsPageModelTests
     {
         [Fact]
         public void TestPass()
