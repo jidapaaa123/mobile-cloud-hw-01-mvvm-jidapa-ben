@@ -4,20 +4,93 @@
              x:Class="Mvvm.Pages.ResultsPage"
              Title="Results"
              BackgroundColor="Black">
-    <VerticalStackLayout Spacing="30" VerticalOptions="Center">
-        <Label 
-            Text="The winner is..."
-            FontSize="30"
-            FontAttributes="Bold"
-            TextColor="#00FF00"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label 
-            Text="{Binding ResultsString}"
-            FontSize="36"
-            FontAttributes="Bold"
-            TextColor="White"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout Spacing="30" Padding="20" VerticalOptions="Center">
+            <!-- Winner Announcement -->
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Label 
+                    Text="The winner is..."
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="#00FF00"
+                    HorizontalOptions="Center" />
+                <Label 
+                    Text="{Binding ResultsString}"
+                    FontSize="36"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="Center" />
+            </VerticalStackLayout>
+
+            <!-- Divider -->
+            <BoxView HeightRequest="2" Color="#00FF00" Margin="20,20,20,0" />
+
+            <!-- Final Scores Section -->
+            <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Label 
+                    Text="Final Scores"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    TextColor="#00FF00"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,10" />
+
+                <!-- Scores List -->
+                <Border StrokeThickness="2" 
+                        Stroke="#00FF00" 
+                        Padding="15"
+                        Background="#1a1a1a"
+                        HorizontalOptions="Center"
+                        WidthRequest="350"
+                        MaximumWidthRequest="400">
+                    <CollectionView ItemsSource="{Binding SortedPlayers}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Padding="10" ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!-- Rank (position) -->
+                                    <Label Grid.Column="0"
+                                           FontSize="18"
+                                           FontAttributes="Bold"
+                                           TextColor="#00FF00"
+                                           VerticalOptions="Center"
+                                           Margin="0,0,10,0" />
+                                    
+                                    <!-- Player Name -->
+                                    <Label Grid.Column="1" 
+                                           Text="{Binding Name}" 
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="White"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Start"
+                                           LineBreakMode="TailTruncation" />
+                                    
+                                    <!-- Score -->
+                                    <Label Grid.Column="2" 
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="#00FF00"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="End">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Score}" />
+                                                <Span Text="" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Border>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

@@ -1,6 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Mvvm.Services;
+using Mvvm.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace Mvvm.PageModels
@@ -14,6 +18,8 @@ namespace Mvvm.PageModels
         private string resultsString = string.Empty;
         [ObservableProperty]
         private int highestScore;
+        [ObservableProperty]
+        private ObservableCollection<Player> sortedPlayers = new();
 
         public ResultsPageModel(GameStateService gameStateService)
         {
@@ -28,6 +34,11 @@ namespace Mvvm.PageModels
                     .ToList();
             ResultsString = $"{string.Join(" and ", winners)} with" +
                 $" {HighestScore} points!";
+            
+            // Create sorted list of all players (highest to lowest score)
+            SortedPlayers = new ObservableCollection<Player>(
+                gameStateService.Players.OrderByDescending(p => p.Score)
+            );
         }
 
     }
