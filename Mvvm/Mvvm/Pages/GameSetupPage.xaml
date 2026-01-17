@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mvvm.Pages.GameSetupPage"
-             Title="GameSetup"
+             Title="Game Setup"
              BackgroundColor="Black">
     <Grid Padding="20" RowSpacing="20">
         <Grid.RowDefinitions>
@@ -14,7 +14,7 @@
 
         <!-- Title -->
         <Label Grid.Row="0"
-               Text="Game Setup"
+               Text="Add Players"
                FontSize="28"
                FontAttributes="Bold"
                TextColor="#00FF00"

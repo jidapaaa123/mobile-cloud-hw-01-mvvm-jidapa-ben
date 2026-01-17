@@ -27,7 +27,7 @@ namespace Mvvm.PageModels
                     .Select(p => p.Name)
                     .ToList();
             ResultsString = $"{string.Join(" and ", winners)} with" +
-                $" {HighestScore} points";
+                $" {HighestScore} points!";
         }
 
     }

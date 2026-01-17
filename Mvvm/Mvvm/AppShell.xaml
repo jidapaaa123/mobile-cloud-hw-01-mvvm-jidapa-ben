@@ -14,7 +14,7 @@
         ContentTemplate="{DataTemplate pages:HomePage}"
         Route="home" />
 
-    <ShellContent
+    <!--<ShellContent
         Title="Dashboard"
         Icon="{StaticResource IconDashboard}"
         ContentTemplate="{DataTemplate pages:MainPage}"
@@ -36,7 +36,7 @@
         Title="Hello World"
         Icon="{StaticResource IconMeta}"
         ContentTemplate="{DataTemplate pages:HelloWorld}"
-        Route="helloWorld" />
+        Route="helloWorld" />-->
 
     <ShellContent
         Title="Game Setup"
