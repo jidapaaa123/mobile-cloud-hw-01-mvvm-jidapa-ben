@@ -66,5 +66,8 @@ namespace Mvvm.PageModels
 
         [ObservableProperty]
         private bool isCorrectGuess = false;
+
+        [ObservableProperty]
+        private bool isHighestScore = false;
     }
 }

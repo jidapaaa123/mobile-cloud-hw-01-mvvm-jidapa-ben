@@ -2,96 +2,189 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Mvvm.Pages.ScoreTrackerPage"
-             Title="ScoreTrackerPage">
-    <Grid Padding="20" RowSpacing="20">
+             Title="Score Tracker"
+             BackgroundColor="Black">
+    <Grid Padding="15" RowSpacing="15">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
         <!-- Round Counter at top -->
-        <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-                              Spacing="10" HorizontalOptions="Start">
-            <Label Text="Round #" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" />
-            <Label Text="{Binding CurrentRound}" FontSize="20" FontAttributes="Bold" VerticalOptions="Center" />
+        <HorizontalStackLayout Grid.Row="0" 
+                              Spacing="10" 
+                              HorizontalOptions="Center">
+            <Label Text="Round #" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   TextColor="#00FF00" 
+                   VerticalOptions="Center" />
+            <Label Text="{Binding CurrentRound}" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   TextColor="White" 
+                   VerticalOptions="Center" />
         </HorizontalStackLayout>
 
-        <!-- Left side: Player scores list -->
-        <Border Grid.Row="1" Grid.Column="0" 
-                StrokeThickness="1" 
-                Stroke="#DDD" 
-                Padding="10"
-                Background="White">
-            <VerticalStackLayout Spacing="10">
-                <Label Text="Scores" FontSize="18" FontAttributes="Bold" HorizontalOptions="Center" />
-                <CollectionView ItemsSource="{Binding Players}" SelectionMode="None">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <VerticalStackLayout Padding="5">
-                                <Label>
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding Name}" FontAttributes="Bold" />
-                                            <Span Text=": " />
-                                            <Span Text="{Binding Score}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                            </VerticalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+        <!-- Current Player Display -->
+        <Border Grid.Row="1"
+                StrokeThickness="2" 
+                Stroke="#00FF00" 
+                Padding="15"
+                Background="#1a1a1a">
+            <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                <Label Text="Current Player" 
+                       FontSize="16" 
+                       HorizontalOptions="Center" 
+                       TextColor="#00FF00" />
+                <Label Text="{Binding CurrentPlayer.Name}" 
+                       FontSize="28" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       HorizontalOptions="Center" />
             </VerticalStackLayout>
         </Border>
 
-        <!-- Center: Current player and other players with checkboxes -->
-        <Border Grid.Row="1" Grid.Column="1" 
-                StrokeThickness="1" 
-                Stroke="#DDD" 
-                Padding="20"
-                Background="White"
-                Margin="10,0,0,0">
-            <VerticalStackLayout Spacing="20">
-                <!-- Current Player Display -->
-                <VerticalStackLayout Spacing="10" HorizontalOptions="Center">
-                    <Label Text="Current Player" FontSize="16" HorizontalOptions="Center" TextColor="Gray" />
-                    <Label Text="{Binding CurrentPlayer.Name}" 
-                           FontSize="24" 
-                           FontAttributes="Bold" 
-                           HorizontalOptions="Center" />
-                </VerticalStackLayout>
+        <!-- Main Content: Scores and Checkboxes side by side -->
+        <Grid Grid.Row="2" ColumnSpacing="10" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                <BoxView HeightRequest="2" Color="#DDD" Margin="0,10" />
+            <!-- Left side: Player scores list -->
+            <Border Grid.Column="0"
+                    StrokeThickness="2" 
+                    Stroke="#00FF00" 
+                    Padding="10"
+                    Background="#1a1a1a">
+                <ScrollView>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Scores" 
+                               FontSize="20" 
+                               FontAttributes="Bold" 
+                               TextColor="#00FF00" 
+                               HorizontalOptions="Center"
+                               Margin="0,0,0,10" />
+                        <CollectionView ItemsSource="{Binding Players}" SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="5" ColumnSpacing="15">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <!-- Name Label with highlight -->
+                                        <Label Grid.Column="0" 
+                                               Text="{Binding Name}" 
+                                               FontAttributes="Bold"
+                                               FontSize="16"
+                                               HorizontalOptions="Start"
+                                               LineBreakMode="TailTruncation">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsHighestScore}" Value="True">
+                                                    <Setter Property="TextColor" Value="#00BBFF" />
+                                                    <Setter Property="FontSize" Value="18" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsHighestScore}" Value="False">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        
+                                        <!-- Score Label with highlight -->
+                                        <Label Grid.Column="1" 
+                                               Text="{Binding Score}" 
+                                               FontSize="16"
+                                               HorizontalOptions="Start"
+                                               Margin="0,0,10,0">
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsHighestScore}" Value="True">
+                                                    <Setter Property="TextColor" Value="#00BBFF" />
+                                                    <Setter Property="FontSize" Value="18" />
+                                                    <Setter Property="FontAttributes" Value="Bold" />
+                                                </DataTrigger>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsHighestScore}" Value="False">
+                                                    <Setter Property="TextColor" Value="White" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Border>
 
-                <!-- Other players with checkboxes -->
-                <Label Text="Select Players Who Guessed Correctly:" FontSize="16" FontAttributes="Bold" />
-                <CollectionView ItemsSource="{Binding OtherPlayers}" SelectionMode="None">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <HorizontalStackLayout Spacing="10" Padding="5">
-                                <CheckBox IsChecked="{Binding IsCorrectGuess}" VerticalOptions="Center" />
-                                <Label Text="{Binding Name}" FontSize="18" VerticalOptions="Center" />
-                            </HorizontalStackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
-        </Border>
+            <!-- Right side: Other players with checkboxes -->
+            <Border Grid.Column="1"
+                    StrokeThickness="2" 
+                    Stroke="#00FF00" 
+                    Padding="10"
+                    Background="#1a1a1a">
+                <ScrollView>
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Guessed Correctly" 
+                               FontSize="18" 
+                               FontAttributes="Bold" 
+                               TextColor="#00FF00"
+                               HorizontalOptions="Center"
+                               Margin="0,0,0,10" />
+                        <CollectionView ItemsSource="{Binding OtherPlayers}" SelectionMode="None">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="5" ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Grid.Column="0"
+                                                  IsChecked="{Binding IsCorrectGuess}" 
+                                                  Color="#00FF00" 
+                                                  VerticalOptions="Center" />
+                                        <Label Grid.Column="1"
+                                               Text="{Binding Name}" 
+                                               FontSize="16" 
+                                               TextColor="White" 
+                                               VerticalOptions="Center"
+                                               LineBreakMode="TailTruncation" />
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </Border>
+        </Grid>
 
-        <!-- Bottom: Next Round and End Game buttons -->
-        <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                              Spacing="20" HorizontalOptions="Center">
-            <Button Text="Next Round" 
+        <!-- Bottom: Buttons -->
+        <Grid Grid.Row="3" ColumnSpacing="10" Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0"
+                    Text="Next Round" 
                     Command="{Binding NextRoundCommand}"
-                    WidthRequest="200" />
-            <Button Text="End Game" 
+                    BackgroundColor="#00FF00"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    HeightRequest="50" />
+            
+            <Button Grid.Column="1"
+                    Text="End Game" 
                     Command="{Binding EndGameCommand}"
-                    WidthRequest="200" />
-        </HorizontalStackLayout>
+                    BackgroundColor="#00FF00"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    HeightRequest="50" />
+        </Grid>
     </Grid>
 </ContentPage>

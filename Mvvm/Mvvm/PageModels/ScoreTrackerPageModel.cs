@@ -57,6 +57,9 @@ namespace Mvvm.PageModels
             // Calculate scores based on the guessing logic
             CalculateScores();
 
+            // Update highest score highlights
+            UpdateHighestScores();
+
             // Reset correct guess flags for next round
             foreach (var player in Players)
             {
@@ -95,6 +98,24 @@ namespace Mvvm.PageModels
 
             // Score current player: 1 point for each correct guess
             CurrentPlayer.Score += correctGuesses;
+        }
+
+        private void UpdateHighestScores()
+        {
+            if (Players.Count == 0) return;
+
+            // Find the highest score
+            int maxScore = Players.Max(p => p.Score);
+
+            // Check if all players have the same score
+            bool allSameScore = Players.All(p => p.Score == maxScore);
+
+            // Update IsHighestScore for each player
+            foreach (var player in Players)
+            {
+                // Highlight if they have the highest score AND not all players have the same score
+                player.IsHighestScore = !allSameScore && player.Score == maxScore;
+            }
         }
 
         [RelayCommand]
