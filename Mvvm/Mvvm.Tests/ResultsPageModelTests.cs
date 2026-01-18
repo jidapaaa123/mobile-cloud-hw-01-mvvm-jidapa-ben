@@ -15,7 +15,7 @@ namespace Mvvm.Tests
 
             var vm = new ResultsPageModel(svc);
 
-            Assert.Equal("Alice with the score of 10", vm.ResultsString);
+            Assert.Equal("Alice with 10 points!", vm.ResultsString);
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace Mvvm.Tests
 
             var vm = new ResultsPageModel(svc);
 
-            Assert.Equal("Alice, Bob with the score of 8", vm.ResultsString);
+            Assert.Equal("Alice and Bob with 8 points!", vm.ResultsString);
         }
     }
 }
